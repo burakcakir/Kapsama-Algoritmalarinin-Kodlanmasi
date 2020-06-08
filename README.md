@@ -1,6 +1,6 @@
 # Kaspama Algoritmalarının Kodlanması
 
-##  ÇAlıştırılması
+##  Çalıştırılması
 
 Projeyi yüklediğiniz zaman dist klasörünün içerisindeki .jar uzantılı dosyayı çalıştırarak projeyi çalıştırabilirsiniz.
 
