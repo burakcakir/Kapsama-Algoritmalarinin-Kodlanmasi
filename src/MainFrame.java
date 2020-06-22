@@ -9,12 +9,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 /*
-   Burak ÇAKIR 
+   author burak
 */
 
-public class deneme extends javax.swing.JFrame {
+public class MainFrame extends javax.swing.JFrame {
 
-    char [] xyz = {'a','b','c','d','e','f','g','h','ı','j','k','l','m','n','o','p','r','s','t','v','y','z'};
+    char [] harfler = {'a','b','c','d','e','f','g','h','ı','j','k','l','m','n','o','p','r','s','t','v','y','z'};
     
     String sonuc = "π = { ";
     
@@ -26,7 +26,7 @@ public class deneme extends javax.swing.JFrame {
     JLabel numaraX[], numaraY[];
     
     
-    public deneme() {
+    public MainFrame() {
         initComponents();
         this.setTitle("Kapsama Algoritmalarının Kodlanması");
         this.setLocationRelativeTo(null);
@@ -195,7 +195,7 @@ public class deneme extends javax.swing.JFrame {
             numaraX[i] = new JLabel();
             numaraX[i].setText(String.valueOf(i + 1)); 
             numaraX[i].setForeground(Color.BLUE);
-            numaraX[i].setBounds(95 + i * 40, 200, 15, 15); // 95 + i * 40, 200, 15, 15
+            numaraX[i].setBounds(95 + i * 40, 200, 15, 15); 
             numaraX[i].setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
             this.add(numaraX[i]);
         }
@@ -205,9 +205,9 @@ public class deneme extends javax.swing.JFrame {
         for (int i = 0; i < y; i++) 
         {
             numaraY[i] = new JLabel();
-            numaraY[i].setText(String.valueOf(xyz[i])); // satır isimlerini harf olarak yazdık.
+            numaraY[i].setText(String.valueOf(harfler[i])); // satır isimlerini harf olarak yazdık.
             numaraY[i].setForeground(Color.BLUE);
-            numaraY[i].setBounds(50, i * 40 + 240, 15, 15); // 50, i * 40 + 240, 15, 15
+            numaraY[i].setBounds(50, i * 40 + 240, 15, 15); 
             numaraY[i].setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
             this.add(numaraY[i]);
         }        
@@ -219,7 +219,7 @@ public class deneme extends javax.swing.JFrame {
             for (int j = 0; j < x; j++) 
             {
                 buttons[i][j] = new JButton();
-                buttons[i][j].setText(String.valueOf("0"));
+                buttons[i][j].setText(String.valueOf(" "));
                 buttons[i][j].setBounds(83 + j * 40, i * 40 + 230, 35, 35);
                 buttons[i][j].addActionListener(action);
                 this.add(buttons[i][j]);
@@ -263,7 +263,7 @@ public class deneme extends javax.swing.JFrame {
                 continue;
 
             int mutlak = 0;
-            int tempJ = 0;
+            int temp = 0;
 
             for (int j = 0; j < y; j++)
             {
@@ -274,22 +274,22 @@ public class deneme extends javax.swing.JFrame {
                 if (buton.equals("1"))
                 {
                     mutlak++;
-                    tempJ = j;
+                    temp = j;
                 }
             }
 
             if (mutlak == 1) {
-                numaraY[tempJ].setForeground(Color.RED);
+                numaraY[temp].setForeground(Color.RED);
 
                 for (int k = 0;k < x;k++) {
-                    String buton = (buttons[tempJ][k].getText());
+                    String buton = (buttons[temp][k].getText());
                     if (buton.equals("1")) {
                         numaraX[k].setForeground(Color.RED);
                     }
                 }
 
-                sonuc += (tempJ + 1) + " ,";
-                ciktiText.setText("Mutlak satır : " + xyz[tempJ]);
+                sonuc += (temp + 1) + " ,";
+                ciktiText.setText("Mutlak satır : " + harfler[temp]);
                 return;
             }
         }
@@ -302,7 +302,7 @@ public class deneme extends javax.swing.JFrame {
             if (numaraY[i].getForeground() == Color.RED)
                 continue;
 
-            int kapsayanSyc = 0;
+            int kapsayanSayac = 0;
 
             for (int t = 0; t < x; t++) 
             {
@@ -311,49 +311,48 @@ public class deneme extends javax.swing.JFrame {
 
                 if (buttons[i][t].getText().equals("1")) 
                 {
-                    kapsayanSyc++;
+                    kapsayanSayac++;
                 }
             }
             for (int j = 0; j < y; j++) 
             {
-                int test = 0;
                 if (i == j || numaraY[j].getForeground() == Color.RED)
                     continue;
 
-                int kapsananSyc = 0, syc = 0;
+                int kapsananSayac = 0, sayac = 0;
                 
-                if (kapsayanSyc > 0) 
+                if (kapsayanSayac > 0) 
                 {
                     for (int k = 0; k < x; k++) 
                     {
                         if (numaraX[k].getForeground() == Color.RED)
                             continue;
 
-                        if (buttons[i][k].getText().equals("0") && buttons[j][k].getText().equals("1")) 
+                        if (buttons[i][k].getText().equals(" ") && buttons[j][k].getText().equals("1")) 
                         {
-                            syc++;
+                            sayac++;
                         }
                         if (buttons[j][k].getText().equals("1") && buttons[i][k].getText().equals("1")) 
                         {
-                            kapsananSyc++;
+                            kapsananSayac++;
                         }
                     }
-                    if (syc > 0)
+                    if (sayac > 0)
                     {
-                        kapsananSyc = 0;
-                        syc = 0;
+                        kapsananSayac = 0;
+                        sayac = 0;
                         continue;
                     }
-                    if (kapsayanSyc >= kapsananSyc && kapsananSyc != 0) 
+                    if (kapsayanSayac >= kapsananSayac && kapsananSayac != 0) 
                     {
                         numaraY[j].setForeground(Color.RED);
-                        ciktiText.setText("Kapsanan satır : " + xyz[j]);
+                        ciktiText.setText("Kapsanan satır : " + harfler[j]);
                         return;
                     }
-                    kapsananSyc = 0;
+                    kapsananSayac = 0;
                 }
             }
-            kapsayanSyc = 0;
+            kapsayanSayac = 0;
         }
 
         // Sütun kapsamalarını bulup silme (boyama)
@@ -363,13 +362,13 @@ public class deneme extends javax.swing.JFrame {
             if (numaraX[i].getForeground() == Color.RED)
                 continue;
 
-            int kapsayanSyc = 0;
+            int kapsayanSayac = 0;
 
             for (int t = 0; t < y; t++) 
             {
                 if (buttons[t][i].getText().equals("1")) 
                 {
-                    kapsayanSyc++;
+                    kapsayanSayac++;
                 }
             }
             for (int j = 0; j < x; j++) 
@@ -377,47 +376,47 @@ public class deneme extends javax.swing.JFrame {
                 if (i == j || numaraX[j].getForeground() == Color.RED)
                     continue;
 
-                int kapsananSyc = 0, syc = 0;
+                int kapsananSayac = 0, sayac = 0;
                 
-                if (kapsayanSyc > 0) 
+                if (kapsayanSayac > 0) 
                 {
                     for (int k = 0; k < y; k++) 
                     {
                         if (numaraY[k].getForeground() == Color.RED)
                             continue;
 
-                        if (buttons[k][i].getText().equals("0") && buttons[k][j].getText().equals("1")) 
+                        if (buttons[k][i].getText().equals(" ") && buttons[k][j].getText().equals("1")) 
                         {
-                            syc++;
+                            sayac++;
                         }
                         if (buttons[k][j].getText().equals("1") && buttons[k][i].getText().equals("1")) 
                         {
-                            kapsananSyc++;
+                            kapsananSayac++;
                         }
                     }
-                    if (syc > 0) 
+                    if (sayac > 0) 
                     {
-                        kapsananSyc = 0;
-                        syc = 0;
+                        kapsananSayac = 0;
+                        sayac = 0;
                         continue;
                     }
-                    if (kapsayanSyc >= kapsananSyc && kapsananSyc != 0) 
+                    if (kapsayanSayac >= kapsananSayac && kapsananSayac != 0) 
                     {
                         numaraX[i].setForeground(Color.RED);
                         ciktiText.setText("Kapsanan sütun : " + (i + 1));
                         return;
                     }
-                    kapsananSyc = 0;
+                    kapsananSayac = 0;
                 }
             }
-            kapsayanSyc = 0;
+            kapsayanSayac = 0;
         }
 
         // Rota algoritmasına geçiş 
         
-        ArrayList<Integer> minWeight = new ArrayList<>();
+        ArrayList<Integer> minAgirlik = new ArrayList<>();
         
-        int minWeightSum = 0;        
+        int minAgirlikTemp = 0;        
         
         for (int i = 0; i < x; i++) 
         {
@@ -425,31 +424,31 @@ public class deneme extends javax.swing.JFrame {
             {
                 if ((buttons[j][i].getText().equals("1")) && numaraY[j].getForeground() != Color.RED && numaraX[i].getForeground() != Color.RED) 
                 {
-                    minWeightSum++;
+                    minAgirlikTemp++;
                 }
             }
-            minWeight.add(minWeightSum);
-            minWeightSum = 0;
+            minAgirlik.add(minAgirlikTemp);
+            minAgirlikTemp = 0;
         }
 
-        ArrayList<Integer> yedek = new ArrayList<>();
+        ArrayList<Integer> gecici = new ArrayList<>();
         
-        for (int i : minWeight) 
+        for (int i : minAgirlik) 
         {
             if (i == 0)
                 continue;
 
-            yedek.add(i);
+            gecici.add(i);
         }
         
-        Collections.sort(yedek);
-        int labelYrowSize = 0;
+        Collections.sort(gecici);
+        int labelYsatirBoyut = 0;
 
         for (int i = 0; i < y; i++) 
         {
             if (numaraY[i].getForeground() != Color.RED) 
             {
-                labelYrowSize++;
+                labelYsatirBoyut++;
             }
         }
 
@@ -458,11 +457,10 @@ public class deneme extends javax.swing.JFrame {
         ArrayList<Float> Sarr = new ArrayList<>();
         ArrayList<Integer> SarrIndexi = new ArrayList<>();
 
-        for (int i = 0; i < minWeight.size(); i++) 
+        for (int i = 0; i < minAgirlik.size(); i++) 
         {
-            if (Objects.equals(minWeight.get(i), yedek.get(0))) 
+            if (Objects.equals(minAgirlik.get(i), gecici.get(0))) 
             {
-                // kücüğü bul
                 for (int k = 0; k < y; k++) 
                 {
                     if (buttons[k][i].getText().equals("1")) 
@@ -471,13 +469,13 @@ public class deneme extends javax.swing.JFrame {
                         {
                             if (numaraY[k].getForeground() != Color.RED && numaraX[j].getForeground() != Color.RED && buttons[k][j].getText().equals("1")) 
                             {
-                                Stoplam += ((float) 1 / (float) minWeight.get(j));
+                                Stoplam += ((float) 1 / (float) minAgirlik.get(j));
                             }
                         }
                     }
                     if (buttons[k][i].getText().equals("1")) 
                     {
-                        Sarr.add(((float) Stoplam * (float) labelYrowSize));
+                        Sarr.add(((float) Stoplam * (float) labelYsatirBoyut));
                         SarrIndexi.add(k);
                         Stoplam = 0;
                     }
@@ -520,7 +518,7 @@ public class deneme extends javax.swing.JFrame {
     if(evt.getSource() == restartButton)
     {
         dispose();
-        deneme game = new deneme();
+        MainFrame game = new MainFrame();
         game.setVisible(true);
     }
         
@@ -533,7 +531,7 @@ public class deneme extends javax.swing.JFrame {
                 for (int j = 0; j < x; j++) {
                     if (e.getSource() == buttons[i][j]) {
                         if (buttons[i][j].getText().equals("1")) {
-                            buttons[i][j].setText("0");
+                            buttons[i][j].setText(" ");
                         } else {
                             buttons[i][j].setText("1");
                         }
@@ -560,20 +558,21 @@ public class deneme extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(deneme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(deneme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(deneme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(deneme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new deneme().setVisible(true);
+                new MainFrame().setVisible(true);
             }
         });
     }
